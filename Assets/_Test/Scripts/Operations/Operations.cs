@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 记录操作步骤
+/// </summary>
 public class Operations : MonoBehaviour {
 
     public delegate void OperationHandler(ICommand command);
@@ -18,6 +21,10 @@ public class Operations : MonoBehaviour {
 
     static List<ICommand> commands = new List<ICommand>();
 
+    /// <summary>
+    /// 加入一个操作命令
+    /// </summary>
+    /// <param name="command"></param>
     public static void RegisterUndo(ICommand command)
     {
         if (commands.Count == maxCommandNumber)
@@ -30,17 +37,6 @@ public class Operations : MonoBehaviour {
         {
             onRegisterCommand(command);
         }
-    }
-
-    //public static void RecordObject(UnityEngine.Object obj)
-    //{
-    //    ObjectCommand objCommand = new ObjectCommand(obj);
-    //    RegisterUndo(objCommand);
-    //}
-
-    public static void RegisterCreateObjectCommand(UnityEngine.Object newObject)
-    {
-        CreateObjectCommand createObjCommand = new CreateObjectCommand(newObject);
     }
 
     public static void Undo()

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 创建物体命令
+/// </summary>
 public class CreateObjectCommand : ICommand {
 
     UnityEngine.Object receiver;

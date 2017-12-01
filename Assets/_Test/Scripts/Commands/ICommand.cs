@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 所有命令继承此接口
+/// </summary>
 public interface ICommand
 {
     string CommandDescription();
