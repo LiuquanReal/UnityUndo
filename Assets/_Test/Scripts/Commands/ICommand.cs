@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface ICommand
 {
+    string CommandDescription();
     /// <summary>
     /// 执行撤销
     /// </summary>

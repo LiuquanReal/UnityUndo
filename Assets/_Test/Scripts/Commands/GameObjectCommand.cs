@@ -45,5 +45,9 @@ public class GameObjectCommand : ICommand {
             item.Value.SetInstance(receiver.AddComponent(item.Key.GetType()));
         }
     }
+    public string CommandDescription()
+    {
+        return "记录物体 " + receiver.name+" 的状态";
+    }
 
 }

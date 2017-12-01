@@ -19,7 +19,7 @@ public class UndoButton : MonoBehaviour {
         Operations.Undo();
     }
 
-    void CheckOperationNum()
+    void CheckOperationNum(ICommand command)
     {
         if (Operations.commandsNum <= 0)
         {

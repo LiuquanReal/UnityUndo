@@ -21,4 +21,8 @@ public class CreateObjectCommand : ICommand {
     {
     }
 
+    public string CommandDescription()
+    {
+        return "创建了物体 " + receiver.name;
+    }
 }

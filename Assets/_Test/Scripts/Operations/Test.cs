@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour {
 
-    public Button destroyObjBtn, destroyCompBtn,createObjBtn;
+    public Text console;
+    public Button destroyObjBtn, destroyCompBtn,createObjBtn,addCompBtn;
     public GameObject cubePrefab;
     [HideInInspector]
     public GameObject currentObj;
 
     private void Start()
     {
+        Operations.onRegisterCommand += OnOperationChange;
+        Operations.onRemoveCommand += OnOperationChange;
         destroyCompBtn.onClick.AddListener(DestryComponent);
         destroyObjBtn.onClick.AddListener(DestroyGameObject);
         createObjBtn.onClick.AddListener(CreateObject);
+        addCompBtn.onClick.AddListener(AddRigidbodyComponent);
     }
 
     private void Update()
@@ -38,6 +42,7 @@ public class Test : MonoBehaviour {
         }
         currentObj = currentObj != null && currentObj.active ? currentObj : null;
         destroyCompBtn.interactable = currentObj != null && currentObj.GetComponent<BoxCollider>() != null;
+        addCompBtn.interactable = currentObj != null && currentObj.GetComponent<AudioSource>() == null;
         destroyObjBtn.interactable = currentObj != null;
     }
 
@@ -61,5 +66,16 @@ public class Test : MonoBehaviour {
         DestroyObjectCommand dc = new DestroyObjectCommand(currentObj);
         Operations.RegisterUndo(dc);
         currentObj.SetActive(false);
+    }
+
+    public void AddRigidbodyComponent()
+    {
+        Operations.RegisterUndo(new GameObjectCommand(currentObj));
+        currentObj.AddComponent<AudioSource>();
+    }
+
+    void OnOperationChange(ICommand command)
+    {
+        console.text = Operations.GetCommandsDescription();
     }
 }

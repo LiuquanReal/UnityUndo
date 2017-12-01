@@ -5,21 +5,25 @@ using UnityEngine;
 
 public class DestroyObjectCommand : ICommand
 {
-    GameObject originObject;
+    GameObject receiver;
 
     public DestroyObjectCommand(GameObject originObject)
     {
-        this.originObject = originObject;
+        this.receiver = originObject;
     }
 
     public void DestroyCommand()
     {
-        GameObject.Destroy(originObject);
+        GameObject.Destroy(receiver);
     }
 
     public void Execute()
     {
-        originObject.SetActive(true);
+        receiver.SetActive(true);
+    }
+    public string CommandDescription()
+    {
+        return "消除了物体 " + receiver.name;
     }
 
 }

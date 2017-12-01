@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
+/// <summary>
+/// 每个component脚本信息都可以用此类存储
+/// </summary>
+/// <typeparam name="T">可以指定具体的类</typeparam>
 class ComponentInfo<T> where T : Component
 {
     string typeName;
