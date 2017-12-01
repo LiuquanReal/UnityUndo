@@ -33,7 +33,6 @@ public class Test : MonoBehaviour {
             }
             else
             {
-                Debug.Log("+");
                 currentObj = null;
             }
         }
@@ -51,8 +50,9 @@ public class Test : MonoBehaviour {
     public void DestryComponent()
     {
         BoxCollider bc = currentObj.GetComponent<BoxCollider>();
-        DestroyComponentCommand<BoxCollider> dc = new DestroyComponentCommand<BoxCollider>(currentObj, bc);
-        Operations.RegisterUndo(dc);
+        //DestroyComponentCommand<BoxCollider> dc = new DestroyComponentCommand<BoxCollider>(currentObj, bc);
+        //Operations.RegisterUndo(dc);
+        Operations.RegisterUndo(new GameObjectCommand(currentObj));
         Destroy(bc);
     }
 

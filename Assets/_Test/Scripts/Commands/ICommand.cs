@@ -10,7 +10,7 @@ public interface ICommand
     /// </summary>
     void Execute();
     /// <summary>
-    /// 当储存的操作数已满时，执行销毁操作命令
+    /// 销毁命令
     /// </summary>
     void DestroyCommand();
 }

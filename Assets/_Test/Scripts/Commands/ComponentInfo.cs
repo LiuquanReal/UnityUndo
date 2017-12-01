@@ -1,37 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Reflection;
+using UnityEngine;
 
-public class DestroyComponentCommand<T> : ICommand where T : Component
+class ComponentInfo<T> where T : Component
 {
-    GameObject receiver;
-    Components<T> component;
-
-    public DestroyComponentCommand(GameObject receiver,T component)
-    {
-        this.receiver = receiver;
-        this.component = new Components<T>(component);
-    }
-
-    public void Execute()
-    {
-        component.SetInstance(receiver.AddComponent<T>());
-    }
-
-    public void DestroyCommand()
-    {
-    }
-}
-
-class Components<T> where T:Component
-{
+    string typeName;
     PropertyInfo[] propertyInfos;
     object[] values;
 
-    public Components(Component comp)
+    public ComponentInfo(Component comp)
     {
+        typeName = comp.GetType().Name;
         propertyInfos = comp.GetType().GetProperties();
         object[] vs = new object[propertyInfos.Length];
         for (int i = 0; i < propertyInfos.Length; i++)
@@ -51,7 +32,6 @@ class Components<T> where T:Component
 
     public void SetInstance(T mainObject)
     {
-        mainObject = (T)Assembly.GetExecutingAssembly().CreateInstance(mainObject.GetType().ToString(), true, BindingFlags.Default, null, values, null, null);
         for (int i = 0; i < propertyInfos.Length; i++)
         {
             try

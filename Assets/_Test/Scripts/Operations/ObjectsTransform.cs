@@ -16,7 +16,7 @@ public class ObjectsTransform : MonoBehaviour {
         if (!moving)
         {
             moving = true;
-            Operations.RegisterUndo(new ObjectCommand(this.transform));
+            Operations.RegisterUndo(new GameObjectCommand(this.gameObject));
         }
         Vector3 pos = transform.position;
         pos.x = x;
