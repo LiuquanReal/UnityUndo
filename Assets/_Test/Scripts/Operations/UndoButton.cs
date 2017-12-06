@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class UndoButton : MonoBehaviour {
     public Button undo;
-    
-
 	// Use this for initialization
 	void Start () {
         Operations.onRegisterCommand += CheckOperationNum;
