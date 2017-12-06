@@ -9,6 +9,9 @@ public class Test : MonoBehaviour {
     public Text console;
     public Button destroyObjBtn, destroyCompBtn,createObjBtn,addCompBtn;
     public GameObject cubePrefab;
+
+    public delegate void OnSelectObject(GameObject gameObject);
+    public event OnSelectObject onSelectObject;
     [HideInInspector]
     public GameObject currentObj;
 
@@ -33,14 +36,23 @@ public class Test : MonoBehaviour {
                 if (hit.collider.tag == "SelectableObj")
                 {
                     currentObj = hit.collider.gameObject;
+                    onSelectObject(currentObj);
                 }
             }
             else
             {
                 currentObj = null;
+                onSelectObject(currentObj);
             }
         }
-        currentObj = currentObj != null && currentObj.active ? currentObj : null;
+        if (currentObj != null)
+        {
+            if (!currentObj.active)
+            {
+                currentObj = null;
+                onSelectObject(currentObj);
+            }
+        }
         destroyCompBtn.interactable = currentObj != null && currentObj.GetComponent<BoxCollider>() != null;
         addCompBtn.interactable = currentObj != null && currentObj.GetComponent<AudioSource>() == null;
         destroyObjBtn.interactable = currentObj != null;

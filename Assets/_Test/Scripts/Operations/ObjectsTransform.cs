@@ -11,7 +11,7 @@ public class ObjectsTransform : MonoBehaviour {
         moving = false;
     }
 
-    public void Moving(float x)
+    public void Moving(Vector3 delta)
     {
         if (!moving)
         {
@@ -19,7 +19,7 @@ public class ObjectsTransform : MonoBehaviour {
             Operations.RegisterUndo(new GameObjectCommand(this.gameObject));
         }
         Vector3 pos = transform.position;
-        pos.x = x;
+        pos += delta;
         transform.position = pos;
     }
 }
